@@ -108,40 +108,42 @@ bool results = true;
 foreach (char c in input)
 {// Char.ToLower(c) == o is making o what input is being checked with.
     if (char.ToLower(c) == 'o')
-     { O++; }
+    { O++; }
     else if (char.ToLower(c) == 'x')
-     { X++; }
+    { X++; }
 }
-    if (X == O)
-    { results = true; }
-    else
-    { results = false; }
-    Console.WriteLine(O);
-    Console.WriteLine(X);
-    Console.WriteLine(results);
+if (X == O)
+{ results = true; }
+else
+{ results = false; }
+Console.WriteLine(O);
+Console.WriteLine(X);
+Console.WriteLine(results);
 
 
 //this method will count how many take the int input of Ex: 10 and if a number that is divisble by 3 or 5 that is less than 10 it will
 //take the sum of those numbers which are (3, 5, 6, 9) resulting in 23 being displayed
 static int Solution(int value)
-  {
-    
+{
+
     int num = 0;
 
     //we will cicle thrue the value (10) 10 times
     for (int i = 3; i < value; i++)
-      {
-    //if i incirments are divisible by 3 or 5 it will be added to the variable num.
-      if (i % 3 == 0 || i % 5 == 0){
-        num += i;
-      }
-    } return num;
-  }
+    {
+        //if i incirments are divisible by 3 or 5 it will be added to the variable num.
+        if (i % 3 == 0 || i % 5 == 0)
+        {
+            num += i;
+        }
+    }
+    return num;
+}
 
 
 //This method will sort an incoming integer variable Ex 5989187 first in accending order and the reverse it.
-   static int DescendingOrder(int num)
-  {
+static int DescendingOrder(int num)
+{
     //"var' is a keyword, it is used to declare an implicit type variable,
     // meaning it can be an int or a string depening on what is assigned to it.
     var chars = num.ToString().ToCharArray();
@@ -154,4 +156,104 @@ static int Solution(int value)
     var s = new string(chars);
     //finally we return it into an int with Int32.Parse.
     return Int32.Parse(s);
-  }
+}
+
+static IEnumerable<int> GetIntegersFromList(List<object> listOfItems)
+{
+    List<int> result = new List<int>();
+
+    for (int i = 0; i < listOfItems.Count; i++)
+    {
+        if (listOfItems[i] is int)
+        {
+            result.Add((int)listOfItems[i]);
+        }
+    }
+    return result;
+}
+
+
+{
+    static bool Check(object[] a, object x)
+    {//if a has x is true
+     // x can be int and a string
+
+        bool c = false;
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (x.ToString() == a[i].ToString())
+            {
+                c = true;
+            }
+        }
+        return c;
+
+    }
+}
+
+// Fibonacci Two ways!
+//Recursion
+// fibonacci numbers are:
+//   0      1      2     3       4     5     6     7   etc
+//   0      1      2      3      5     7     9     11   etc
+// (0+0)  (0+1)  (1+1)  (1+2)   2+3   3+4   4+5   5+6    etc
+
+static int fib(int n)
+{
+    if (n == 1 || n == 2)
+    {
+        return 1;
+    }
+    return fib(n - 1) + fib(n - 2);
+}
+
+// fibonacci for loop way
+
+
+static int Fibonacci(int n)
+{
+    int num1 = 0;
+    int num2 = 1;
+    int num = n;
+    for (int i = 1; i < n; i++)
+    {
+        int temp = num1;
+        num1 = num2;
+        num2 = temp + num2;
+    }
+    return num2;
+}
+// Spliting a string into an array and seperating it by spaces
+//I.E. string = "john went to the store"
+//is converted too ["john", "went", "to, "The", "Store"]
+static string[] StringToArray(string str)
+{
+    string[] arr = new string[] { "" };
+    arr = str.Split(' ');
+    return arr;
+}
+
+//Find numbers which are divisible by given number
+//IE [1, 2, 3, 4, 5, 6], 2 --> [2, 4, 6]
+static int[] DivisibleBy(int[] n, int d)
+{
+    int count = 0;
+    // the first for loop is to find the length of our final array
+    for (int i = 0; i < n.Length; i++)
+    {// we use modulo to get the count of numbers that are divisible by variable 'd'
+        if (n[i] % d == 0)
+            count++;
+    }
+    int q = 0;
+    // we put the count as our new array length.
+    int[] a = new int[count];
+    for (int i = 0; i < n.Length; i++)
+    {
+        if (n[i] % d == 0)
+        {//we store the ints that are divisible by d in our new array:
+            a[q] = n[i];
+            q++;
+        }
+    }
+    return a;
+}
